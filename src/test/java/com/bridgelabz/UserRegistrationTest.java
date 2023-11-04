@@ -19,4 +19,9 @@ public class UserRegistrationTest {
         boolean res = UserRegistration.validateLastName("Dute");
         Assertions.assertTrue(res);
     }
+    @Test
+    public void testGivenEmailIDValidOrNot(){
+        boolean res = UserRegistration.validateEmailID("rohandute1@gmail.com");
+        Assertions.assertTrue(res);
+    }
 }
