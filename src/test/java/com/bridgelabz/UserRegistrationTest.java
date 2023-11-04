@@ -24,4 +24,9 @@ public class UserRegistrationTest {
         boolean res = UserRegistration.validateEmailID("rohandute1@gmail.com");
         Assertions.assertTrue(res);
     }
+    @Test
+    public void testGivenPhoneNumberAndReturnValidOrNot(){
+        boolean res = UserRegistration.validatePhoneNumber("91 9011824004");
+        Assertions.assertTrue(res);
+    }
 }
