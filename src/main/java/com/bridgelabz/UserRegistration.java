@@ -11,4 +11,9 @@ public class UserRegistration {
         Matcher match = pattern.matcher(firstName);
         return match.matches();
     }
+    public static boolean validateLastName(String lastName){
+        Pattern pattern = Pattern.compile(regex);
+        Matcher match = pattern.matcher(lastName);
+        return match.matches();
+    }
 }

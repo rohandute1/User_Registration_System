@@ -14,4 +14,9 @@ public class UserRegistrationTest {
         boolean res = UserRegistration.validateFirstName("Rohan");
         Assertions.assertTrue(res);
     }
+    @Test
+    public void testValidLastNameWithMinimumLength(){
+        boolean res = UserRegistration.validateLastName("Dute");
+        Assertions.assertTrue(res);
+    }
 }
