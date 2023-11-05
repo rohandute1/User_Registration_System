@@ -29,4 +29,9 @@ public class UserRegistrationTest {
         boolean res = UserRegistration.validatePhoneNumber("91 9011824004");
         Assertions.assertTrue(res);
     }
+    @Test
+    public void testGivenPasswordAndReturnValidOrNot(){
+        boolean res = UserRegistration.validatePassword("Rohan@1111");
+        Assertions.assertTrue(res);
+    }
 }

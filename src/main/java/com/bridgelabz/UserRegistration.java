@@ -7,6 +7,7 @@ public class UserRegistration {
     final static String regex = "^[A-Z]{1}[a-z]{3,}$";
     final static String regexID = "^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+([.][a-z]+)+([.][a-z])*)$";
     final static String regexNumber = "^91 *[789]{1}[0-9]{9}$";
+    final static String regexPassword = "^[a-zA-Z0-9@#$&]{8,}$";
 
     public static boolean validateFirstName(String firstName) {
         Pattern pattern = Pattern.compile(regex);
@@ -26,6 +27,12 @@ public class UserRegistration {
     public static boolean validatePhoneNumber(String number){
         Pattern pattern = Pattern.compile(regexNumber);
         Matcher match = pattern.matcher(number);
+        return match.matches();
+    }
+
+    public static boolean validatePassword(String pass) {
+        Pattern pattern = Pattern.compile(regexPassword);
+        Matcher match  = pattern.matcher(pass);
         return match.matches();
     }
 }
