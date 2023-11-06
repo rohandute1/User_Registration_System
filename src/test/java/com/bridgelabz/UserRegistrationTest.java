@@ -31,7 +31,7 @@ public class UserRegistrationTest {
     }
     @Test
     public void testGivenPasswordAndReturnValidOrNot(){
-        boolean res = UserRegistration.validatePassword("RohanDute@1");
+        boolean res = UserRegistration.validatePassword("RohnDute@1");
         Assertions.assertTrue(res);
     }
 }
