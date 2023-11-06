@@ -21,7 +21,7 @@ public class UserRegistrationTest {
     }
     @Test
     public void testGivenEmailIDValidOrNot(){
-        boolean res = UserRegistration.validateEmailID("rohandute1@gmail.com");
+        boolean res = UserRegistration.validateEmailID("abc@yahoo.com");
         Assertions.assertTrue(res);
     }
     @Test
