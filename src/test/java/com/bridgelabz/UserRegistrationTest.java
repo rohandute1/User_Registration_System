@@ -7,16 +7,21 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class UserRegistrationTest {
 
+    public static class CustomTestFailureException extends RuntimeException {
+        public CustomTestFailureException(String message) {
+            super(message);
+        }
+    }
     public UserRegistrationTest() {
     }
-
     @Test
     public void testValidFirstNameWithMinimumLength(){
         try {
-            boolean res = UserRegistration.validateFirstName("Rohan");
-            Assertions.assertTrue(res);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userFirstName.detailsValidator("Rohan");
+            Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e) {
+            // Assertion failed, throw a custom exception
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
     }
     @ParameterizedTest
@@ -27,42 +32,41 @@ public class UserRegistrationTest {
     })
     public void testInvalidFirstNameWithMinimumLength(String firstName,boolean expected){
         try{
-            boolean res = UserRegistration.validateFirstName(firstName);
-            Assertions.assertEquals(expected,res);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userFirstName.detailsValidator(firstName);
+            Assertions.assertEquals(expected,result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
     }
     @Test
     public void testValidLastNameWithMinimumLength(){
         try {
-            boolean res = UserRegistration.validateLastName("Dute");
-            Assertions.assertTrue(res);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userLastName.detailsValidator("Abcde");
+            Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e) {
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
     }
     @ParameterizedTest
     @CsvSource({
-            "abch,false",
+            "ch,false",
             "psjdbg,false",
     })
     public void testInvalidLastNameWithMinimumLength(String lastName,boolean expected){
         try{
-            boolean res = UserRegistration.validateLastName(lastName);
-            Assertions.assertEquals(expected,res);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userLastName.detailsValidator(lastName);
+            Assertions.assertEquals(expected,result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
-
     }
     @Test
     public void testGivenEmailIDValidOrNot(){
         try{
-            boolean res = UserRegistration.validateEmailID("abc@yahoo.com");
-            Assertions.assertTrue(res);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userEmailID.detailsValidator("abc@yahoo.com");
+            Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
     }
     @ParameterizedTest
@@ -83,12 +87,11 @@ public class UserRegistrationTest {
     })
     public void testGivenInValidEmails(String email, boolean expected){
         try {
-            boolean res = UserRegistration.validateEmailID(email);
-            Assertions.assertEquals(res,expected);
-        }catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userEmailID.detailsValidator(email);
+            Assertions.assertEquals(result,expected, "Expected the validation to pass, but it failed.");
+        }catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
-
     }
     @ParameterizedTest
     @CsvSource({
@@ -98,36 +101,33 @@ public class UserRegistrationTest {
     })
     public void testGivenPhoneNumberInValid(String number, boolean expected){
         try {
-            boolean res = UserRegistration.validatePhoneNumber(number);
-            Assertions.assertEquals(res, expected);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userPhoneNumber.detailsValidator(number);
+            Assertions.assertEquals(result, expected, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
-
     }
     @Test
     public void testGivenPasswordAndReturnValidOrNot(){
         try {
-            boolean res = UserRegistration.validatePassword("RohnDute@1");
-            Assertions.assertTrue(res);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userPassword.detailsValidator("Passw1rd!");
+            Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
-
     }
     @ParameterizedTest
     @CsvSource({
-            "rohan123, false",
-            "Rohan@ancv,false",
-            "123@Rohan, false"
+            "password, false",
+            "12345678v,false",
+            "Abcd12, false"
     })
-    public void testInValidPassword(String pass, boolean expected){
+    public void testInValidPassword(String password, boolean expected){
         try {
-            boolean res = UserRegistration.validatePassword(pass);
-            Assertions.assertEquals(res, expected);
-        } catch (IllegalArgumentException e){
-            System.out.println("Unexpected exception: " + e.getMessage());
+            boolean result = UserRegistration.userPassword.detailsValidator(password);
+            Assertions.assertEquals(result, expected, "Expected the validation to pass, but it failed.");
+        } catch (AssertionError e){
+            throw new CustomTestFailureException("Custom exception: " + e.getMessage());
         }
-
     }
 }
