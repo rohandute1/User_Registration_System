@@ -14,10 +14,11 @@ public class UserRegistrationTest {
     }
     public UserRegistrationTest() {
     }
+    UserRegistration userRegistration = new UserRegistration();
     @Test
     public void testValidFirstNameWithMinimumLength(){
         try {
-            boolean result = UserRegistration.userFirstName.detailsValidator("Rohan");
+            boolean result = userRegistration.userFirstName.detailsValidator("Rohan");
             Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e) {
             // Assertion failed, throw a custom exception
@@ -32,7 +33,7 @@ public class UserRegistrationTest {
     })
     public void testInvalidFirstNameWithMinimumLength(String firstName,boolean expected){
         try{
-            boolean result = UserRegistration.userFirstName.detailsValidator(firstName);
+            boolean result = userRegistration.userFirstName.detailsValidator(firstName);
             Assertions.assertEquals(expected,result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -41,7 +42,7 @@ public class UserRegistrationTest {
     @Test
     public void testValidLastNameWithMinimumLength(){
         try {
-            boolean result = UserRegistration.userLastName.detailsValidator("Abcde");
+            boolean result = userRegistration.userLastName.detailsValidator("Abcde");
             Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e) {
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -54,7 +55,7 @@ public class UserRegistrationTest {
     })
     public void testInvalidLastNameWithMinimumLength(String lastName,boolean expected){
         try{
-            boolean result = UserRegistration.userLastName.detailsValidator(lastName);
+            boolean result = userRegistration.userLastName.detailsValidator(lastName);
             Assertions.assertEquals(expected,result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -63,7 +64,7 @@ public class UserRegistrationTest {
     @Test
     public void testGivenEmailIDValidOrNot(){
         try{
-            boolean result = UserRegistration.userEmailID.detailsValidator("abc@yahoo.com");
+            boolean result = userRegistration.userEmailID.detailsValidator("abc@yahoo.com");
             Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -87,7 +88,7 @@ public class UserRegistrationTest {
     })
     public void testGivenInValidEmails(String email, boolean expected){
         try {
-            boolean result = UserRegistration.userEmailID.detailsValidator(email);
+            boolean result = userRegistration.userEmailID.detailsValidator(email);
             Assertions.assertEquals(result,expected, "Expected the validation to pass, but it failed.");
         }catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -101,7 +102,7 @@ public class UserRegistrationTest {
     })
     public void testGivenPhoneNumberInValid(String number, boolean expected){
         try {
-            boolean result = UserRegistration.userPhoneNumber.detailsValidator(number);
+            boolean result = userRegistration.userPhoneNumber.detailsValidator(number);
             Assertions.assertEquals(result, expected, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -110,7 +111,7 @@ public class UserRegistrationTest {
     @Test
     public void testGivenPasswordAndReturnValidOrNot(){
         try {
-            boolean result = UserRegistration.userPassword.detailsValidator("Passw1rd!");
+            boolean result = userRegistration.userPassword.detailsValidator("Passw1rd!");
             Assertions.assertTrue(result, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
@@ -124,7 +125,7 @@ public class UserRegistrationTest {
     })
     public void testInValidPassword(String password, boolean expected){
         try {
-            boolean result = UserRegistration.userPassword.detailsValidator(password);
+            boolean result = userRegistration.userPassword.detailsValidator(password);
             Assertions.assertEquals(result, expected, "Expected the validation to pass, but it failed.");
         } catch (AssertionError e){
             throw new CustomTestFailureException("Custom exception: " + e.getMessage());
